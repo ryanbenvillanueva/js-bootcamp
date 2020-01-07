@@ -1,14 +1,29 @@
+const todos = [{
+    text: 'Order cat food',
+    completed: true
+}, {
+    text: 'Clean kitchen',
+    completed: false
+}, {
+    text: 'Buy food',
+    completed: true
+}, {
+    text: 'Do work',
+    completed: false
+}, {
+    text: 'Exercise',
+    completed: true
+}];
 
+const deleteTodo = function (todos, todoText) {
+    for (let i = 0; i < todos.length; i++) {
+        if (todos[i].text.toLowerCase() === todoText.toLowerCase()) {
+            todos.splice(i, 1);
+        }
+    }
+};
+// 1. Convert array to array of objects -> text, completed
+// 2. Create a function to remove a todo by text value
 
-const todos = ['Order Cat food', 'Clean kitchen', 'Buy food', 'Do work', 'Exercise' ];
-
-todos.splice(2, 1);
-todos.push('Buy coffee');
-todos.shift();
-
-console.log(`You have ${todos.length} todos!`);
-
-todos.forEach(function (todo, index) {
-    console.log(`${index + 1}. ${todo}`);
-});
-
+deleteTodo(todos, 'buy food');
+console.log(todos);
