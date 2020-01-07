@@ -14,6 +14,15 @@ const findNote = function(notes, noteTitle) {
         return note.title.toLowerCase() === noteTitle.toLowerCase();
     });
 };
+const findNotes = function (notes, query) {
+    return notes.filter(function (note, index) {
+        const isTitleMatch = note.title.toLocaleLowerCase().includes(query.toLowerCase());
+        const isBodyMatch = note.body.toLocaleLowerCase().includes(query.toLocaleLowerCase());
+        return isTitleMatch || isBodyMatch;
+    });
+};
+
+console.log(findNotes(notes, 'work'));
 
 // const findNote = function(notes, noteTitle) {
 //     const index = notes.findIndex(function (note, index) {
@@ -24,12 +33,3 @@ const findNote = function(notes, noteTitle) {
 
 const note = findNote(notes, 'Office modifcation');
 console.log(note);
-
-// console.log(notes.length);
-// console.log(notes);
-
-// const index = notes.findIndex(function (note, index) {
-//     console.log(note);
-//     return note.title === 'Habits to work on';
-// });
-// console.log(index);
