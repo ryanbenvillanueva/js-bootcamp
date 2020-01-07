@@ -1,8 +1,10 @@
-// Create an array with five todos
-// You hav x todos
-// print the first and second to last items 
 
-const todos = ['eat', 'sleep', 'code', 'study', 'play' ];
-console.log(`You have ${todos.length} todos`);
-console.log(todos[0]);
-console.log(todos[todos.length - 2]);
+
+const todos = ['Order Cat food', 'Clean kitchen', 'Buy food', 'Do work', 'Exercise' ];
+
+todos.splice(2, 1);
+todos.push('This is the new last item');
+todos.shift();
+
+console.log(`You have ${todos.length} todos!`);
+console.log(todos);
