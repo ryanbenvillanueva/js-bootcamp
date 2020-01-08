@@ -1,9 +1,9 @@
 const todos = [{
     text: 'Order cat food',
-    completed: true
+    completed: false
 }, {
     text: 'Clean kitchen',
-    completed: false
+    completed: true
 }, {
     text: 'Buy food',
     completed: true
@@ -29,7 +29,21 @@ const getThingsToDo = function (todos) {
     });
 };
 
-console.log(getThingsToDo(todos));
+const sortTodos = function(todos) {
+    todos.sort (function (a, b) {
+        if (a.completed === b.completed) {
+            return 0;
+        } else if (a.completed) {
+            return 1;
+        } else {
+            return -1;
+        }
+    });
+};
+
+sortTodos(todos);
+console.log(todos);
+// console.log(getThingsToDo(todos));
 
 // deleteTodo(todos, 'buy food');
 // console.log(todos);
