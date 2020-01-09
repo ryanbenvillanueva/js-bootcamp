@@ -35,26 +35,26 @@ const renderTodos = function (todos, filters) {
     document.querySelector('#todos').appendChild(summary);
     
     filteredTodos.forEach(function (todo) {
-        const todoText = document.createElement('p');
-        todoText.textContent = todo.text;
-        document.querySelector('#todos').appendChild(todoText);
+        const p = document.createElement('p');
+        p.textContent = todo.text;
+        document.querySelector('#todos').appendChild(p);
     });
 
 };
 
 renderTodos(todos, filters);
 
-// Listen for new todo creation
-document.querySelector('#add-todo').addEventListener('click', function (e) {
-    console.log('Add a new todo...');
-});
-
-// Listen for todo text change
-document.querySelector('#new-todo').addEventListener('input', function (e) {
-    console.log(e.target.value);
-});
-
 document.querySelector('#search-text').addEventListener('input', function (e) {
     filters.searchText = e.target.value;
     renderTodos(todos, filters);
+});
+
+document.querySelector('#new-todo').addEventListener('submit', function (e) {
+    e.preventDefault();
+    todos.push({
+        text: e.target.elements.text.value,
+        completed: false
+    });
+    renderTodos(todos, filters);
+    e.target.elements.text.value = '';
 });
