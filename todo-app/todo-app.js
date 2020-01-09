@@ -15,19 +15,34 @@ const todos = [{
     completed: true
 }];
 
-const incompleteTodos = todos.filter(function (todo) {
-    return !todo.completed;
-});
+const filters = {
+    searchText: ''
+};
 
-const summary = document.createElement('h2');
-summary.textContent = `You have ${incompleteTodos.length} todos left`;
-document.querySelector('body').appendChild(summary);
+const renderTodos = function (todos, filters) {
+    const filteredTodos = todos.filter(function (todo) {
+        return todo.text.toLowerCase().includes(filters.searchText.toLowerCase());
+    });
 
-todos.forEach(function (todo) {
-    const todoText = document.createElement('p');
-    todoText.textContent = todo.text;
-    document.querySelector('body').appendChild(todoText);
-});
+    const incompleteTodos = filteredTodos.filter(function (todo) {
+        return !todo.completed;
+    });
+    
+    document.querySelector('#todos').innerHTML = '';
+
+    const summary = document.createElement('h2');
+    summary.textContent = `You have ${incompleteTodos.length} todos left`;
+    document.querySelector('#todos').appendChild(summary);
+    
+    filteredTodos.forEach(function (todo) {
+        const todoText = document.createElement('p');
+        todoText.textContent = todo.text;
+        document.querySelector('#todos').appendChild(todoText);
+    });
+
+};
+
+renderTodos(todos, filters);
 
 // Listen for new todo creation
 document.querySelector('#add-todo').addEventListener('click', function (e) {
@@ -37,4 +52,9 @@ document.querySelector('#add-todo').addEventListener('click', function (e) {
 // Listen for todo text change
 document.querySelector('#new-todo').addEventListener('input', function (e) {
     console.log(e.target.value);
+});
+
+document.querySelector('#search-text').addEventListener('input', function (e) {
+    filters.searchText = e.target.value;
+    renderTodos(todos, filters);
 });
